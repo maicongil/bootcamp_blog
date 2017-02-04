@@ -83,6 +83,17 @@ app.put("/blogs/:id", function(req, res){
     });
 });
 
+app.delete("/blogs/:id", function(req, res){
+    Blog.findByIdAndRemove(req.params.id, function(error){
+        if(error){
+            console.log(error);
+            res.redirect("/blogs");
+        }else{
+            res.redirect("/blogs");
+        }
+    });
+})
+
 app.listen(port, function(){
     console.log("Server is listening at port: "+port);
 });
