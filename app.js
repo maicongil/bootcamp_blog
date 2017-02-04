@@ -48,6 +48,17 @@ app.post("/blogs", function(req, res){
     });
 });
 
+app.get("/blogs/:id", function(req, res){
+    Blog.findById(req.params.id, function(error, blog){
+        if(error){
+            console.log(error);
+            res.redirect("/blogs");
+        }else{
+            res.render("show", {blog : blog});
+        };
+    });
+});
+
 app.listen(port, function(){
     console.log("Server is listening at port: "+port);
 });
