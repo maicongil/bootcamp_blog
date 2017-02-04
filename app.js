@@ -32,6 +32,22 @@ app.get("/blogs", function(req, res){
     });
 });
 
+app.get("/blogs/new", function(req, res){
+    res.render("new");
+});
+
+
+app.post("/blogs", function(req, res){
+    Blog.create(req.body.blog, function(error, blog){
+        if(error){
+            console.log(error);
+            res.render("new");
+        }else{
+            res.redirect("/blogs");
+        }
+    });
+});
+
 app.listen(port, function(){
     console.log("Server is listening at port: "+port);
 });
